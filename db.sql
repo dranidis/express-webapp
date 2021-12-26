@@ -5,8 +5,8 @@ create database my_db;
 use my_db;
 
 create table Users (
-    email varchar(255),
-    pass varchar(255)
+    email varchar(255)  NOT NULL UNIQUE,
+    pass varchar(255) NOT NULL
 );
 
 insert into Users (email, pass)

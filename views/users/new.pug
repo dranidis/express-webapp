@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+  h1= 'New User'
+  form(action='/users', method='POST')
+    label Email 
+    input(type='text', name='email', value=user.email)
+    label Password 
+    input(type='text', name='password')
+    a(href='/users') Cancel
+    button(type='submit') Create
+
+  p #{error}
