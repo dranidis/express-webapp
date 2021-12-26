@@ -1,6 +1,9 @@
-drop database my_db;
+drop database if exists my_db;
 
 create database my_db;
+
+use my_db;
+
 create table Users (
     email varchar(255),
     pass varchar(255)
