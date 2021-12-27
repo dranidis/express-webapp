@@ -4,12 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var bcrypt = require('bcrypt');
+
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-
-var connection = require('./models/connect');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

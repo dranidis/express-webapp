@@ -2,6 +2,11 @@ extends ../layout
 
 block content
   h1= 'All Users'
-  ul
-  for user in users
-    li= user.email
+  table
+    tr  
+      th email 
+      th pass 
+    for user in users
+      tr
+        td= user.email 
+        td= user.pass

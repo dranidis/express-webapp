@@ -3,10 +3,12 @@ extends ../layout
 block content
   h1= 'New User'
   form(action='/users', method='POST')
-    label Email 
-    input(type='text', name='email', value=user.email)
-    label Password 
-    input(type='text', name='password')
+    div
+      label Email 
+      input(type='text', name='email', value=user.email, required)
+    div
+      label Password 
+      input(type='password', name='password', value=user.password, required)
     a(href='/users') Cancel
     button(type='submit') Create
 
