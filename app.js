@@ -38,25 +38,10 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 
-/* GET home page. */
-app.get('/', checkAuthenticated, function (req, res, next) {
-  res.render('index', { name: req.user.email });
-});
-
-app.get('/login', function (req, res, next) {
-  res.render('login', { title: 'Express' });
-});
-
-app.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login',
-  failureFlash: true
-}));
-
-app.delete('/logout', function (req, res, next) {
-  req.logOut()
-  res.redirect('/login')
-});
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+app.use('/', indexRouter);
+app.use('/users', checkAuthenticated, usersRouter);
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
@@ -64,11 +49,6 @@ function checkAuthenticated(req, res, next) {
   }
   res.redirect('/login')
 }
-
-// var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-// app.use('/', indexRouter);
-app.use('/users', checkAuthenticated, usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
