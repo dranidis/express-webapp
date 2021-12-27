@@ -15,14 +15,7 @@ router.get('/', async function (req, res, next) {
 
 router.post('/', async (req, res) => {
   console.log(req.body)
-  var hashedPassword;
-  try {
-    hashedPassword = await bcrypt.hash(req.body.password, 10);
-    console.log('hashedPassword: ', hashedPassword)
-  } catch (error) {
-    console.error(error)
-    res.redirect('/users/new')
-  }
+  var hashedPassword = await bcrypt.hash(req.body.password, 10);
   var err = await userInstance.createUser({
     email: req.body.email,
     password: hashedPassword
@@ -36,8 +29,6 @@ router.post('/', async (req, res) => {
   } else {
     res.redirect('/login')
   }
-
-
 });
 
 router.get('/new', (req, res) => {

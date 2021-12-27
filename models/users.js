@@ -1,6 +1,6 @@
 const getConnection = require('./connect');
 
-class User {
+class UserRepository {
     async getUsers() {
         const conn = await getConnection();
         let [rows, fields] = await conn.execute('SELECT * FROM Users');
@@ -25,6 +25,6 @@ class User {
     }
 }
 
-var userInstance = new User()
+var userRepository = new UserRepository()
 
-module.exports = userInstance
+module.exports = userRepository
