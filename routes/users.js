@@ -3,7 +3,7 @@ var router = express.Router();
 var bcrypt = require('bcrypt');
 
 
-var userInstance = require('../models/users');
+var userRepository = require('../models/users');
 
 /* GET users listing. */
 router.get('/', async function (req, res, next) {
@@ -16,7 +16,7 @@ router.get('/', async function (req, res, next) {
 router.post('/', async (req, res) => {
   console.log(req.body)
   var hashedPassword = await bcrypt.hash(req.body.password, 10);
-  var err = await userInstance.createUser({
+  var err = await userRepository.createUser({
     email: req.body.email,
     password: hashedPassword
   })

@@ -1,7 +1,10 @@
-extends layout
+//- extends layout
 
 block content
   h1= 'Login'
+  if messages.error 
+    div #{messages.error} 
+
   form(action='/login', method='POST')
     div
       label Email 

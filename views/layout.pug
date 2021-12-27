@@ -12,3 +12,6 @@ html
           li <a href="/users">All Users </a>
           li <a href="/users/new">New User </a>
     block content
+
+    form(action='/logout?_method=DELETE', method='POST')
+      button(type='submit') Log Out

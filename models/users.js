@@ -23,6 +23,16 @@ class UserRepository {
         }
         return null
     }
+
+    async getUserByEmail(email) {
+        const conn = await getConnection();
+        let [rows, fields] = await conn.execute('SELECT * FROM Users WHERE email = ?', [email]);
+        console.log('The users with email: ' + email + ' are: ', rows)
+        if (rows.length == 1) {
+            return rows[0]
+        }
+        return null
+    }
 }
 
 var userRepository = new UserRepository()
