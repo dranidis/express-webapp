@@ -5,7 +5,7 @@ block content
   if messages.error 
     div #{messages.error} 
 
-  form(action='/login', method='POST')
+  form(action='/auth/login', method='POST')
     div
       label Email 
       input(type='text', name='email', required)
@@ -14,4 +14,5 @@ block content
       input(type='password', name='password', required)
     button(type='submit') Login
 
+  a(href='/auth/register') Register
   p #{error}

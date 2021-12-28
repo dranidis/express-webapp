@@ -38,16 +38,18 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 
+var authRouter = require('./routes/auth');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-app.use('/', indexRouter);
+app.use('/auth', authRouter);
+app.use('/', checkAuthenticated, indexRouter);
 app.use('/users', checkAuthenticated, usersRouter);
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next()
   }
-  res.redirect('/login')
+  res.redirect('/auth/login')
 }
 
 // catch 404 and forward to error handler
