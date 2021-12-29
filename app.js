@@ -1,24 +1,24 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var passport = require('passport')
-var flash = require('express-flash')
-var session = require('express-session')
-var methodOverride = require('method-override')
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const passport = require('passport');
+const flash = require('express-flash');
+const session = require('express-session');
+const methodOverride = require('method-override');
 
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
+  require('dotenv').config();
 }
 
-var initializePassport = require('./passport-config')
-var userRepository = require('./models/users');
+const initializePassport = require('./passport-config');
+const userRepository = require('./models/users');
 
-initializePassport(passport, userRepository.getUserByEmail)
+initializePassport(passport, userRepository.getUserByEmail);
 
 
-var app = express();
+const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -28,28 +28,28 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(flash())
+app.use(flash());
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false
-}))
-app.use(passport.initialize())
-app.use(passport.session())
-app.use(methodOverride('_method'))
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(methodOverride('_method'));
 
-var authRouter = require('./routes/auth');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 app.use('/auth', authRouter);
 app.use('/', checkAuthenticated, indexRouter);
 app.use('/users', checkAuthenticated, usersRouter);
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    return next()
+    return next();
   }
-  res.redirect('/auth/login')
+  res.redirect('/auth/login');
 }
 
 // catch 404 and forward to error handler
@@ -58,7 +58,7 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
