@@ -4,16 +4,14 @@ class UserRepository {
   async getUsers() {
     const conn = await getConnection();
     const [rows] = await conn.execute('SELECT * FROM Users');
-
     console.log('The users are: ', rows);
-
     return rows;
   }
 
   async createUser(user) {
     console.log('Creating user: ', user);
-    const conn = await getConnection();
     try {
+      const conn = await getConnection();
       await conn.query(
         'INSERT INTO Users (email, pass) VALUES (?, ?)',
         [user.email, user.password],

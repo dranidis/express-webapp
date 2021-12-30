@@ -33,7 +33,7 @@ router.post('/register', async function (req, res) {
       error: err
     });
   } else {
-    res.redirect('auth//login');
+    res.redirect('auth/login');
   }
 });
 
