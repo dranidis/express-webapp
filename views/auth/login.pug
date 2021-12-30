@@ -1,4 +1,4 @@
-//- extends layout
+extends authlayout
 
 block content
   h1= 'Login'
@@ -6,12 +6,12 @@ block content
     div #{messages.error} 
 
   form(action='/auth/login', method='POST')
+    div(class="input-block")
+      label(for='email') Email 
+      input(type='text', name='email', placeholder='Email', required)
     div
-      label Email 
-      input(type='text', name='email', required)
-    div
-      label Password 
-      input(type='password', name='password', required)
+      label(for='password') Password 
+      input(type='password', name='password', placeholder='password', required)
     button(type='submit') Login
 
   a(href='/auth/register') Register

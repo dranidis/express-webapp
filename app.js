@@ -55,11 +55,10 @@ function checkAuthenticated(req, res, next) {
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
-
 });
 
 // // error handler
-app.use(function (err, req, res, next) { // next argumnet needed HERE!
+app.use(function (err, req, res, next) { // next argument needed HERE to call the err function!
   console.log('ERROR HANDLER');
   // set locals, only providing error in development
   res.locals.message = err.message;
@@ -68,6 +67,7 @@ app.use(function (err, req, res, next) { // next argumnet needed HERE!
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+  next();
 });
 
 module.exports = app;
